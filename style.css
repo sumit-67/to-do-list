@@ -57,7 +57,7 @@ h1 {
     cursor: pointer;
 }
 
-#input button:hover {
+#input button:hover, #download:hover, #import:hover, #clear:hover {
     background-color: #0056b3;
 }
 
