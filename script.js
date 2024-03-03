@@ -58,10 +58,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 var reader = new FileReader();
                 reader.readAsText(file, "UTF-8");
                 reader.onload = function (evt) {
-                    const taskElements = document.querySelectorAll("#taskList li");
-                    taskElements.forEach(function(taskElement) {
-                        taskElement.remove();
-                    });
+                    if (confirm("Do you want to clear your current tasks?")) {
+                        const taskElements = document.querySelectorAll("#taskList li");
+                        taskElements.forEach(function(taskElement) {
+                            taskElement.remove();
+                        });
+                    }
                     const tasks = JSON.parse(evt.target.result);
                     if (tasks) {
                         tasks.forEach(function(task) {
@@ -108,15 +110,14 @@ document.addEventListener("DOMContentLoaded", function() {
         const li = document.createElement("li");
         
         const markButton = document.createElement("button");
-        markButton.textContent = "Mark";
+        // markButton.type = "checkbox";
+        // markButton.textContent = "Mark";
         markButton.classList.add("mark");
         markButton.addEventListener("click",function() {
             if (li.classList.contains("marked")) {
                 li.classList.remove("marked");
-                markButton.textContent = "Mark";
             } else {
                 li.classList.add("marked");
-                markButton.textContent = "Unmark";
             }
             saveTasks(); // Save the tasks after removing one
         });
@@ -124,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         if (isMarked) {
             li.classList.add("marked");
-            markButton.textContent = "Unmark";
         }
 
         const textBox = document.createElement("div");
