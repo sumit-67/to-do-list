@@ -9,6 +9,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // loads tasks from the local storage
     loadTasks();
 
+    // dark mode
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+
     addTaskButton.addEventListener("click", function() {
         const taskText = taskInput.value.trim();
 
